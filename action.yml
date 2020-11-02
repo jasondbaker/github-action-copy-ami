@@ -1,0 +1,48 @@
+name: "Copy AMI GitHub Action"
+description: "Copy AMIs from one AWS account to another."
+author: "Exosite"
+inputs:
+  source_ami_id:
+    description: "The AMI ID to copy"
+    required: true
+  source_aws_access_key:
+    description: "An AWS access key credential for the source account."
+  source_aws_secret_key:
+    description: "AnAWS secret access key for the source account."
+    required: true
+  source_aws_region:
+    description: "The AWS region where the source AMI is located."
+    required: true
+  source_aws_role_arn:
+    description: "An optional source AWS role to use."
+  target_ami_name:
+    description: "The new AMI name in the target AWS account"
+  target_ami_description:
+      description: "The new AMI description"
+  target_aws_access_key:
+    description: "An AWS access key credential for the target account."
+  target_aws_secret_key:
+    description: "AnAWS secret access key for the target account."
+    required: true
+  target_aws_region:
+    description: "The target AWS region to copy the AMI to."
+    required: true
+  target_aws_role_arn:
+    description: "An optional target AWS role to use."
+  target_kms_key:
+    description: "A KMS Key ID for the target AMW account"
+    required: true
+  delete_on_copy:
+    description: "Optionally delete source AMI after copying to new account."
+    default: "False"
+
+
+outputs:
+  ami_id:
+    description: "The ID of the new AMI which was created in the target account."
+  ami_name:
+    description: "The AMI name which was copied."
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
